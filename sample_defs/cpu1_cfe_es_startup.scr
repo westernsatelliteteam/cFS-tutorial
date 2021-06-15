@@ -1,4 +1,5 @@
-CFE_APP, sample_app,  SAMPLE_APP_Main, SAMPLE_APP,   50,   16384, 0x0, 0;
+CFE_APP, sample_app,   SAMPLE_APP_Main, SAMPLE_APP,   50,   16384, 0x0, 0;
+CFE_APP, hw,           HW_Main,         HW,           50,   16384, 0x0, 0;
 !
 ! Startup script fields:
 ! 1. Object Type      -- CFE_APP for an Application, or CFE_LIB for a library.

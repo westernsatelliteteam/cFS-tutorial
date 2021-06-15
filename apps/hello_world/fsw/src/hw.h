@@ -24,7 +24,7 @@ typedef struct {
     uint32 RunStatus;
 
     // spot to store the current telemetry packet
-    SAMPLE_APP_HkTlm_t HkTlm;
+    HW_HkTlm_t HkTlm;
 
     // spot to store unprocessed incoming commands
     CFE_SB_PipeId_t CommandPipe;
@@ -34,7 +34,7 @@ typedef struct {
     uint16 PipeDepth;
 
     // array for metadata on all of our events
-    CFE_EVS_BinFilter_t EventFilters[SAMPLE_APP_EVENT_COUNTS];
+    CFE_EVS_BinFilter_t EventFilters[HW_EVENT_COUNTS];
 } HW_Data_t;
 
 // app main method that will be called by cFE upon startup
