@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+    # for local development of cFS
+    dev:
+        container_name: dev
+        restart: "no" # let us manually restart if cFS crashes
+        networks:
+            - sat-link # network for our ground station to connect to
+        environment:
+            O: build-dev # folder to install to
+            BUILDTYPE: "debug"
+            OMIT_DEPRECATED: "true" # don't rely on depreciated cFE features
+            SIMULATION: native # use native_osconfig.cmake
+            BUILD: cpu1 # the name of the bundle
+        cap_add: 
+            - CAP_SYS_RESOURCE # give the runtime adequate resources
+        build: # select the correct dockerfile
+            context: ./dockerfiles
+            dockerfile: ubuntu.Dockerfile
+        volumes:
+          - ./:/cfs # mount the code into the docker container
+
+# definition of the aforementioned network
+networks:
+    sat-link:
+        driver: bridge
