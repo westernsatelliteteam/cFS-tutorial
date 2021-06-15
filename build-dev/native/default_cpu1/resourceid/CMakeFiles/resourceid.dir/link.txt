@@ -1,0 +1,2 @@
+/usr/bin/ar qc libresourceid.a  CMakeFiles/resourceid.dir/src/cfe_resourceid_api.c.o
+/usr/bin/ranlib libresourceid.a

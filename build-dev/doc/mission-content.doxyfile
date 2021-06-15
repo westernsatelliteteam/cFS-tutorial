@@ -1,0 +1,9 @@
+INPUT += /cfs/apps/sample_app
+INPUT += /cfs/psp
+INPUT += /cfs/cfe/modules/msg
+INPUT += /cfs/cfe/modules/sbr
+INPUT += /cfs/cfe/modules/resourceid
+PREDEFINED += 
+INPUT += /cfs/osal/src/os/
+INPUT += /cfs/psp/fsw/pc-linux
+INPUT += /cfs/build-dev/native/default_cpu1/inc

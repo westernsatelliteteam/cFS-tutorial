@@ -1,0 +1,4 @@
+/exe/cpu1/cf/cfe_es_startup.scr
+/exe/cpu1/cf/sample_app.so
+/exe/cpu1/cf/sample_app.so
+/exe/cpu1/core-cpu1
