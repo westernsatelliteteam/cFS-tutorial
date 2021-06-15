@@ -1,0 +1,13 @@
+# cfs
+build-*
+
+# gnd
+yamcs/target/
+
+# misc
+.DS_Store
+.vscode
+
+# config
+.env
+yamcs.west.yaml
