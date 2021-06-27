@@ -21,6 +21,26 @@ services:
         volumes:
           - ./:/cfs # mount the code into the docker container
 
+    # for the ground station
+    yamcs:
+        # select the right container and build
+        build:
+            context: ./dockerfiles
+            dockerfile: yamcs.Dockerfile
+        hostname: yamcs
+        container_name: yamcs
+        env_file: .env # load an environment file
+        command: "/run_yamcs.sh" # run the maven project
+        volumes: # map the yamcs directory into the container
+            - ./yamcs:/yamcs
+            - ./dockerfiles/run_yamcs.sh:/run_yamcs.sh
+        networks: # connect it to the same network as cFS
+            - sat-link
+        ports: # expose the required ports
+            - "8090:8090"
+            - "${TO_PORT}:${TO_PORT}/udp"
+            - "${CI_PORT}:${CI_PORT}"
+
 # definition of the aforementioned network
 networks:
     sat-link:
