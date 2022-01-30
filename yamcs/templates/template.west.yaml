@@ -49,6 +49,8 @@ mdb:
     subLoaders:
       - type: "sheet"
         spec: "mdb/hw.xls"
+      - type: "sheet"
+        spec: "mdb/to_lab.xls"
 
 # Configuration for streams created at server startup
 streamConfig:
