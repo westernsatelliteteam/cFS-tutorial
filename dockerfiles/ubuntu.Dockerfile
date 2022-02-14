@@ -33,4 +33,4 @@ RUN apt-get -qy update                           \
 WORKDIR /cfs
 
 # run the start script
-ENTRYPOINT [ "./dockerfiles/start.sh" ]
+ENTRYPOINT [ "ls", "&&", "./dockerfiles/start.sh" ]

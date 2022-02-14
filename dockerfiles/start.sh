@@ -3,6 +3,8 @@
 make prep &&                  \
 make &&                       \
 make install &&               \
-cd $O/exe/cpu1 &&             \
 echo "Installed to $O" &&     \
-./core-cpu1
+if [ "$O" == "build-dev" ]; then
+    cd $O/exe/cpu1 &&         \
+    ./core-cpu1
+fi

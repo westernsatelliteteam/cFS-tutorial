@@ -21,6 +21,21 @@ services:
         volumes:
           - ./:/cfs # mount the code into the docker container
 
+    # Raspberry Pi 4 target
+    rpi4:
+        container_name: rpi4
+        restart: "no"
+        environment:
+            O: build-rpi4 # folder to install to
+            BUILDTYPE: "debug" # don't rely on depreciated cFE features
+            OMIT_DEPRECATED: "true"
+            BUILD: cpu2 # the name of the bundle
+        build: # select the correct dockerfile
+            context: ./dockerfiles
+            dockerfile: rpi4.Dockerfile
+        volumes:
+          - ./:/cfs # mount the code into the docker container
+
     # for the ground station
     yamcs:
         # select the right container and build
