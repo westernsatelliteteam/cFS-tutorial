@@ -48,9 +48,19 @@ mdb:
     spec: "mdb/ccsds-headers.xls"
     subLoaders:
       - type: "sheet"
-        spec: "mdb/hw.xls"
+        spec: "mdb/es.xls"
+      - type: "sheet"
+        spec: "mdb/evs.xls"
+      - type: "sheet"
+        spec: "mdb/sb.xls"
+      - type: "sheet"
+        spec: "mdb/time.xls"
+      - type: "sheet"
+        spec: "mdb/tbl.xls"
       - type: "sheet"
         spec: "mdb/to_lab.xls"
+      - type: "sheet"
+        spec: "mdb/hw.xls"
 
 # Configuration for streams created at server startup
 streamConfig:
