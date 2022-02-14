@@ -91,8 +91,6 @@ int32 RPI_LIB_Init(void) {
 int32 RPI_LIB_DriveForward(int32 DriveTime) {
     int32 Status;
 
-    OS_printf("Driving forward for %d ms\n", DriveTime);
-
     // write to value files
     for(int i = 0; i < 5; i++) {
         Status = write(RPI_LIB_Motor_FD[i], RPI_LIB_FORWARD[i], 1);
@@ -115,8 +113,6 @@ int32 RPI_LIB_DriveForward(int32 DriveTime) {
 
 int32 RPI_LIB_DriveReverse(int32 DriveTime) {
     int32 Status;
-
-    OS_printf("Driving reverse for %d ms\n", DriveTime);
 
     // write to value files
     for(int i = 0; i < 5; i++) {
@@ -141,8 +137,6 @@ int32 RPI_LIB_DriveReverse(int32 DriveTime) {
 int32 RPI_LIB_DriveTurnCW(int32 DriveTime) {
     int32 Status;
 
-    OS_printf("Driving CW for %d ms\n", DriveTime);
-
     // write to value files
     for(int i = 0; i < 5; i++) {
         Status = write(RPI_LIB_Motor_FD[i], RPI_LIB_CW[i], 1);
@@ -165,8 +159,6 @@ int32 RPI_LIB_DriveTurnCW(int32 DriveTime) {
 
 int32 RPI_LIB_DriveTurnCCW(int32 DriveTime) {
     int32 Status;
-
-    OS_printf("Driving CCW for %d ms\n", DriveTime);
 
     // write to value files
     for(int i = 0; i < 5; i++) {

@@ -9,10 +9,15 @@
 #define HW_INVALID_MSGID_ERR_EID 5  // Invalid Message ID
 #define HW_LEN_ERR_EID           6  // Invalid Length
 #define HW_PIPE_ERR_EID          7  // Pipe Error (Software Bus)
+#define HW_DRIVE_FWD_INF_EID     8  // Drive motors forward 
+#define HW_DRIVE_REV_INF_EID     9  // Drive motors reverse 
+#define HW_DRIVE_CW_INF_EID      10 // Drive motors CW 
+#define HW_DRIVE_CCW_INF_EID     11 // Drive motors CCW 
+#define HW_DRIVE_ERR_EID         12 // Drive motors error 
 
 /*
 used to create a correctly-sized array that will contain information for registering the events with Event Services (EVS)
 */
-#define HW_EVENT_COUNTS 7
+#define HW_EVENT_COUNTS 12
 
 #endif 

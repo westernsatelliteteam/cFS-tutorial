@@ -51,6 +51,10 @@ void  HW_ProcessGroundCommand(CFE_SB_Buffer_t *SBBufPtr);
 int32 HW_ReportHousekeeping(const CFE_MSG_CommandHeader_t *Msg);
 int32 HW_ResetCounters(const HW_ResetCountersCmd_t *Msg);
 int32 HW_Noop(const HW_NoopCmd_t *Msg);
+int32 HW_DriveForward(const HW_DriveForwardCmd_t *Msg);
+int32 HW_DriveReverse(const HW_DriveReverseCmd_t *Msg);
+int32 HW_DriveCW(const HW_DriveCWCmd_t *Msg);
+int32 HW_DriveCCW(const HW_DriveCCWCmd_t *Msg);
 
 // verifies that the incoming command matches the definition we made in hw_msgids.h
 bool HW_VerifyCmdLength(CFE_MSG_Message_t *MsgPtr, size_t ExpectedLength);

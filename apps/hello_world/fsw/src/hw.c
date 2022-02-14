@@ -2,6 +2,9 @@
 #include "hw_version.h"
 #include "hw.h"
 
+// Raspberry Pi library
+#include "rpi_lib.h"
+
 // declare all the global app data we need
 HW_Data_t HW_Data;
 
@@ -200,6 +203,38 @@ void HW_ProcessGroundCommand(CFE_SB_Buffer_t *SBBufPtr) {
             }
             break;
 
+        // drive forward
+        case HW_DRIVE_FORWARD_CC:
+            // check if the message payload is the expected size before continuing
+            if (HW_VerifyCmdLength(&SBBufPtr->Msg, sizeof(HW_DriveForwardCmd_t))) {
+                HW_DriveForward((HW_DriveForwardCmd_t *)SBBufPtr);
+            }
+            break;
+
+        // drive reverse
+        case HW_DRIVE_REVERSE_CC:
+            // check if the message payload is the expected size before continuing
+            if (HW_VerifyCmdLength(&SBBufPtr->Msg, sizeof(HW_DriveReverseCmd_t))) {
+                HW_DriveReverse((HW_DriveReverseCmd_t *)SBBufPtr);
+            }
+            break;
+
+        // drive CW
+        case HW_DRIVE_CW_CC:
+            // check if the message payload is the expected size before continuing
+            if (HW_VerifyCmdLength(&SBBufPtr->Msg, sizeof(HW_DriveCWCmd_t))) {
+                HW_DriveCW((HW_DriveCWCmd_t *)SBBufPtr);
+            }
+            break;
+
+        // drive CCW
+        case HW_DRIVE_CCW_CC:
+            // check if the message payload is the expected size before continuing
+            if (HW_VerifyCmdLength(&SBBufPtr->Msg, sizeof(HW_DriveCCWCmd_t))) {
+                HW_DriveCCW((HW_DriveCCWCmd_t *)SBBufPtr);
+            }
+            break;
+
         // unknown command code - error
         default:
             CFE_EVS_SendEvent(HW_COMMAND_ERR_EID, CFE_EVS_EventType_ERROR, "Invalid ground command code: CC = %d", CommandCode);
@@ -283,3 +318,72 @@ bool HW_VerifyCmdLength(CFE_MSG_Message_t *MsgPtr, size_t ExpectedLength) {
     // return successfully
     return result;
 }
+
+int32 HW_DriveForward(const HW_DriveForwardCmd_t *Msg) {
+    int32 Status;
+
+    // Use RPI library to access hardware
+    Status = RPI_LIB_DriveForward(Msg->TimeMS);
+    if(Status == CFE_SUCCESS) {
+        CFE_EVS_SendEvent(HW_DRIVE_FWD_INF_EID, CFE_EVS_EventType_INFORMATION, "HW: Drove forward for %dms",
+                      Msg->TimeMS);
+    }
+    else {
+        CFE_EVS_SendEvent(HW_DRIVE_ERR_EID, CFE_EVS_EventType_ERROR, "HW: Error on forward drive for %dms (EC=%d)",
+                      Msg->TimeMS, Status);
+    }
+
+    return CFE_SUCCESS;
+}
+
+int32 HW_DriveReverse(const HW_DriveReverseCmd_t *Msg) {
+    int32 Status;
+
+    // Use RPI library to access hardware
+    Status = RPI_LIB_DriveReverse(Msg->TimeMS);
+    if(Status == CFE_SUCCESS) {
+        CFE_EVS_SendEvent(HW_DRIVE_REV_INF_EID, CFE_EVS_EventType_INFORMATION, "HW: Drove reverse for %dms",
+                      Msg->TimeMS);
+    }
+    else {
+        CFE_EVS_SendEvent(HW_DRIVE_ERR_EID, CFE_EVS_EventType_ERROR, "HW: Error on reverse drive for %dms (EC=%d)",
+                      Msg->TimeMS, Status);
+    }
+
+    return CFE_SUCCESS;
+}
+
+int32 HW_DriveCW(const HW_DriveCWCmd_t *Msg) {
+    int32 Status;
+
+    // Use RPI library to access hardware
+    Status = RPI_LIB_DriveTurnCW(Msg->TimeMS);
+    if(Status == CFE_SUCCESS) {
+        CFE_EVS_SendEvent(HW_DRIVE_FWD_INF_EID, CFE_EVS_EventType_INFORMATION, "HW: Drove CW for %dms",
+                      Msg->TimeMS);
+    }
+    else {
+        CFE_EVS_SendEvent(HW_DRIVE_ERR_EID, CFE_EVS_EventType_ERROR, "HW: Error on CW drive for %dms (EC=%d)",
+                      Msg->TimeMS, Status);
+    }
+
+    return CFE_SUCCESS;
+}
+
+int32 HW_DriveCCW(const HW_DriveCCWCmd_t *Msg) {
+    int32 Status;
+
+    // Use RPI library to access hardware
+    Status = RPI_LIB_DriveTurnCCW(Msg->TimeMS);
+    if(Status == CFE_SUCCESS) {
+        CFE_EVS_SendEvent(HW_DRIVE_CCW_INF_EID, CFE_EVS_EventType_INFORMATION, "HW: Drove CCW for %dms",
+                      Msg->TimeMS);
+    }
+    else {
+        CFE_EVS_SendEvent(HW_DRIVE_ERR_EID, CFE_EVS_EventType_ERROR, "HW: Error on CCW drive for %dms (EC=%d)",
+                      Msg->TimeMS, Status);
+    }
+
+    return CFE_SUCCESS;
+}
+

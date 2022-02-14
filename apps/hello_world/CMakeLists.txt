@@ -5,3 +5,5 @@ include_directories(fsw/platform_inc)
 
 # Create the app module
 add_cfe_app(hw fsw/src/hw.c)
+
+add_cfe_app_dependency(hw rpi_lib)
